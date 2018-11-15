@@ -5,16 +5,21 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences prefShared;
     public static final String PREF_FILE_NAME = "userdetails";
     SharedPreferences.Editor editor;
+
+    private static final String FILENAME = "users.json";
 
     public Boolean isLoggedIn(){
         prefShared = getApplicationContext().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
@@ -35,6 +40,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void writeToFile(String data) {
+        FileOutputStream fos = null;
+
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(data.getBytes());
+        }
+        catch (IOException e) {
+            System.out.println("Write to file failed");
+        }
+        finally {
+            if (fos!=null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefShared = this.getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefShared.edit();
+        editor.clear();
         editor.putBoolean("userLoggedIn", false);
+        editor.putBoolean("cartEmpty", true);
         editor.commit();
 
     }

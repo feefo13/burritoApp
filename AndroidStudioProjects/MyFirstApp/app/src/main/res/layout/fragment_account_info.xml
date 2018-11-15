@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_centerHorizontal="true"
-        android:text="Jose Duarte"
+        android:id="@+id/userName"
         android:textSize="28sp" />
 
     <TableLayout
@@ -44,7 +44,7 @@
                 android:layout_margin="1dp"
                 android:layout_column="1"
 
-                android:text="JoseDuarte@my.unt.edu"
+                android:id="@+id/userEmail"
                 android:textSize="18sp" />
 
         </TableRow>
@@ -69,7 +69,7 @@
                 android:layout_margin="1dp"
                 android:layout_column="1"
 
-                android:text="555-5555-5555"
+                android:id="@+id/userPhone"
                 android:textSize="18sp" />
 
         </TableRow>
@@ -95,7 +95,7 @@
                 android:layout_margin="1dp"
                 android:layout_column="1"
 
-                android:text="1155 Union Cir,"
+                android:id="@+id/userAddress"
                 android:textSize="18sp" />
 
         </TableRow>
@@ -111,7 +111,8 @@
                 android:layout_margin="1dp"
                 android:layout_column="1"
 
-                android:text="Denton, TX 76203"
+
+                android:id="@+id/userAddress2"
                 android:textSize="18sp" />
         </TableRow>
 

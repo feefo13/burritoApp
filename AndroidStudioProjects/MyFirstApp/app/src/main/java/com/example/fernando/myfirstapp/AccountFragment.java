@@ -31,6 +31,9 @@ import java.util.List;
 
 public class AccountFragment extends Fragment implements View.OnClickListener  {
     private static final String FILENAME = "users.json";
+    private static final Integer init_memberID = 116435;
+    Integer nextAvailableMemberID;
+
     View v;
     private FragmentActivity myContext;
 
@@ -89,7 +92,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
     public void onClick(View v) {
         // read users from json file, populate list
         List<User> userList = new ArrayList<User>();
-        userList = readFromFile(userList);
+        userList = readFromFile(userList);  // comment out when database is 0
 
         Fragment selectedFragment = null;
         FragmentManager fragManager = myContext.getSupportFragmentManager();
@@ -104,29 +107,55 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
         if (password_str.equals(confirm_password_str)){
 
             // verify password, and that email is unused. pass data to json file
-            Gson gson = new Gson();
-            User newUser = new User( email_str,  password_str,  name_str,  address_str,  phone_str);
-            userList.add(newUser);
+            boolean verifyFlag = true;
 
-            // converts object to json string, print to
-            Type type = new TypeToken<List<User>>() {}.getType();
-            String json = gson.toJson(userList, type);
-
-            writeToFile(json);
-
-            prefShared = this.getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
-            editor = prefShared.edit();
-            editor.putBoolean("userLoggedIn", true);
-            editor.commit();
-
-            if (isAccountViewBeforeLogIn()){
-                selectedFragment = new RewardsFragment();
+            if (userList.size() == 0){
+            //
             }
             else{
-                selectedFragment = new AccountInfoFragment();
+                for (User oldUser : userList) {
+
+                    String old_email = oldUser.getEmail();
+                    if (email_str.equals(old_email)){
+                        verifyFlag = false;
+                    }
+                }
             }
 
-            fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+
+            if (verifyFlag){
+                Gson gson = new Gson();
+                //nextAvailableMemberID = init_memberID + userList.size(); // delete later for when database is 0
+                User newUser = new User( email_str,  password_str,  name_str,  address_str,  phone_str, nextAvailableMemberID, 0);
+                userList.add(newUser);
+
+                // converts object to json string, print to
+                Type type = new TypeToken<List<User>>() {}.getType();
+                String json = gson.toJson(userList, type);
+
+                writeToFile(json);
+
+                prefShared = this.getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
+                editor = prefShared.edit();
+                editor.putBoolean("userLoggedIn", true);
+                editor.commit();
+
+                if (isAccountViewBeforeLogIn()){
+                    selectedFragment = new RewardsFragment();
+                }
+                else{
+                    selectedFragment = new AccountInfoFragment();
+                }
+
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+            }
+            else{
+                selectedFragment = new InvalidInputFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+            }
+
+
 
         }
         else {
@@ -169,11 +198,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
             fis = myContext.openFileInput(FILENAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            //StringBuilder sb = new StringBuilder();
-            //String text;
             Type type = new TypeToken<List<User>>() {}.getType();
 
             userList =  new Gson().fromJson(br, type);
+            nextAvailableMemberID = init_memberID + userList.size();
             Gson gson = new Gson();
             Log.d("tag", gson.toJson(userList, type));
 
@@ -193,4 +221,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
         }
         return userList;
     }
+
+
 }
