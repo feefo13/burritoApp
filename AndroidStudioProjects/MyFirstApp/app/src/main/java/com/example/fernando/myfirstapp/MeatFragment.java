@@ -51,6 +51,10 @@ public class MeatFragment extends Fragment implements View.OnClickListener{
         TextView turkeyTextView = (TextView) v.findViewById(R.id.meat_item4);
         turkeyTextView.setOnClickListener(this);
 
+        TextView noneView = (TextView) v.findViewById(R.id.meat_item5);
+        noneView.setOnClickListener(this);
+
+
         portionChange =0;
 
         final CheckBox checkBox1 = (CheckBox) v.findViewById(R.id.meat_checkBox1);

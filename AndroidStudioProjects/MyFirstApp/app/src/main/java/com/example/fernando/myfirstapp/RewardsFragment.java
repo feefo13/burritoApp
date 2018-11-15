@@ -8,12 +8,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class RewardsFragment extends Fragment {
+public class RewardsFragment extends Fragment implements View.OnClickListener{
     View v;
 
     TextView memberID;
@@ -30,6 +32,9 @@ public class RewardsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_rewards, container, false);
+
+        Button chipsButton = (Button) v.findViewById(R.id.button_redeem);
+        chipsButton.setOnClickListener(this);
 
         memberID = (TextView)  v.findViewById(R.id.userID);
         rewardPTS = (TextView)  v.findViewById(R.id.userPoints);
@@ -52,5 +57,24 @@ public class RewardsFragment extends Fragment {
     public void onAttach(Activity activity) {
         myContext=(FragmentActivity) activity;
         super.onAttach(activity);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Fragment selectedFragment = null;
+        FragmentManager fragManager = myContext.getSupportFragmentManager();
+
+
+        switch (v.getId()) {
+
+            case R.id.button_redeem:
+
+                selectedFragment = new RedeemFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+                break;
+
+        }
+
     }
 }

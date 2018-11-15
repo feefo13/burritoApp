@@ -44,6 +44,9 @@ public class RiceFragment extends Fragment implements View.OnClickListener{
         TextView blackTextView = (TextView) v.findViewById(R.id.rice_item2);
         blackTextView.setOnClickListener(this);
 
+        TextView noneView = (TextView) v.findViewById(R.id.rice_item5);
+        noneView.setOnClickListener(this);
+
         portionChange = 0;
 
         final CheckBox checkBox1 = (CheckBox) v.findViewById(R.id.rice_checkBox1);

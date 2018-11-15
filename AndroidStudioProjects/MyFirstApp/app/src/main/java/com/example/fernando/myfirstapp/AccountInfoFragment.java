@@ -8,22 +8,43 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.List;
+
 
 public class AccountInfoFragment extends Fragment {
+    private static final String FILENAME = "users.json";
+    private static final Integer init_memberID = 116435;
+    Integer nextAvailableMemberID;
+
     View v;
+    private FragmentActivity myContext;
+
+    SharedPreferences prefShared;
+    public static final String PREF_FILE_NAME = "userdetails";
+    SharedPreferences.Editor editor;
+    List<User> userList;
+
     TextView email;
     TextView name;
     TextView phone;
     TextView address;
     TextView address2;
 
-    private FragmentActivity myContext;
-    public static final String PREF_FILE_NAME = "userdetails";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,6 +62,7 @@ public class AccountInfoFragment extends Fragment {
         String name_str = prefShared.getString("name", "N/A");
         String phone_str = prefShared.getString("phone", "N/A");
         String address_str = prefShared.getString("address", "N/A");
+
 
         String[] address_list = address_str.split(",");
         address_str = address_list[0] + ",";

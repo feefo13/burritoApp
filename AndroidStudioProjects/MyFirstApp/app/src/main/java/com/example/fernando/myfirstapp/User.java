@@ -16,11 +16,13 @@ public class User {
     Boolean areFavoriteOrdersStored ;
     Boolean areFavoriteItemsStored ;
     Boolean areOrdersPlaced ; // populate recent orders
+    Boolean isCartEmpty;
 
-    Integer[] order_num_list;
+    Integer[] order_num_list; // prior order numbers
     List<Item> favoriteItems;
     List<Order> favoriteOrders;
     List<CC> storedCards;
+    List<Item> cartItems;
 
 
 
@@ -33,6 +35,7 @@ public class User {
         this.phone = phone;
         this.memberID = memberID;
         this.rewardPoints = rewardPoints;
+        this.isCartEmpty = true;
 
         // set to true after
         this.areCardsStored = false;
@@ -40,10 +43,19 @@ public class User {
         this.areFavoriteOrdersStored= false;
         this.areOrdersPlaced=false;
 
-
         this.favoriteOrders = new ArrayList<Order>();
         this.favoriteItems = new ArrayList<Item>();
         this.storedCards = new ArrayList<CC>();
+        this.cartItems = new ArrayList<Item>();
+
+    }
+
+    public void setOrder_num_list(Integer[] order_num_list) {
+        this.order_num_list = order_num_list;
+    }
+
+    public List<Item> getCartItems() {
+        return cartItems;
     }
 
     public void addToSetOfOrderItems(Item item){
@@ -53,6 +65,15 @@ public class User {
     public void addToSetOfOrders(Order order){
         this.favoriteOrders.add(order);
     }
+
+    public void addToFavoriteItems(Item item){
+        this.favoriteItems.add(item);
+    }
+
+    public void addToCart(Item item){
+        this.cartItems.add(item);
+    }
+
 
     public void addToSetOfCCs(CC cc){
         this.storedCards.add(cc);

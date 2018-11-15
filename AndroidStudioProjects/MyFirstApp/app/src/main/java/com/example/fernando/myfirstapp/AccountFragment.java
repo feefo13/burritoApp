@@ -126,7 +126,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
 
             if (verifyFlag){
                 Gson gson = new Gson();
-                //nextAvailableMemberID = init_memberID + userList.size(); // delete later for when database is 0
+                //nextAvailableMemberID = init_memberID + userList.size(); // comment back in later for when database is 0
                 User newUser = new User( email_str,  password_str,  name_str,  address_str,  phone_str, nextAvailableMemberID, 0);
                 userList.add(newUser);
 
@@ -138,6 +138,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
 
                 prefShared = this.getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
                 editor = prefShared.edit();
+
+                editor.putString("email", email_str);
+                editor.putString("name", name_str);
+                editor.putString("phone", phone_str);
+                editor.putString("address", address_str);
+                //editor.putInt("rewardPoints", oldUser.getRewardPoints());
+                //editor.putInt("memberID", oldUser.getMemberID());
                 editor.putBoolean("userLoggedIn", true);
                 editor.commit();
 

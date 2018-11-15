@@ -1,20 +1,20 @@
 package com.example.fernando.myfirstapp;
 
 public class Item {
-        String name;
+    String name;
     String mealCode;
-    Float price;
+    Double price;
 
 
     // build your own
-    public Item (String name, String mealCode, Float  price){
+    public Item (String name, String mealCode, Double  price){
         this.name = name;
         this.mealCode = mealCode;
         this.price = price;
     }
 
     // simple items
-    public Item (String name, Float  price){
+    public Item (String name, Double  price){
         this.name = name;
         this.price = price;
     }
@@ -23,7 +23,7 @@ public class Item {
         return name;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 

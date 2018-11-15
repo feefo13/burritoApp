@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.menu_bottom_navigation_bar);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        String data = "";
+        //writeToFile(data);// to flush database must be commented out
 
         SharedPreferences prefShared = this.getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefShared.edit();

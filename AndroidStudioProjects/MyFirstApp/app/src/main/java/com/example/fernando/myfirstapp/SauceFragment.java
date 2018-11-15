@@ -44,6 +44,10 @@ public class SauceFragment extends Fragment implements View.OnClickListener{
         TextView blackTextView = (TextView) v.findViewById(R.id.sauce_item2);
         blackTextView.setOnClickListener(this);
 
+        TextView noneView = (TextView) v.findViewById(R.id.sauce_item5);
+        noneView.setOnClickListener(this);
+
+
         portionChange = 0;
 
         final CheckBox checkBox1 = (CheckBox) v.findViewById(R.id.sauce_checkBox1);
@@ -87,11 +91,11 @@ public class SauceFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
         Fragment selectedFragment = null;
         FragmentManager fragManager = myContext.getSupportFragmentManager();
         SharedPreferences prefShared = this.getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefShared.edit();
-
         switch(v.getId()){
 
             case R.id.sauce_item1:

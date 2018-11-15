@@ -47,6 +47,9 @@ public class TortillaFragment extends Fragment implements View.OnClickListener{
         TextView wholewheatTextView = (TextView) v.findViewById(R.id.tortilla_item3);
         wholewheatTextView.setOnClickListener(this);
 
+        TextView noneView = (TextView) v.findViewById(R.id.tortilla_item5);
+        noneView.setOnClickListener(this);
+
         portionChange = 0;
 
         final CheckBox checkBox1 = (CheckBox) v.findViewById(R.id.tortilla_checkBox1);
