@@ -47,7 +47,6 @@ public class OtherFragment extends Fragment implements View.OnClickListener{
     Integer item5;
     Integer item6;
     Integer item7;
-    //TextView mealCodev = (TextView)v.findViewById(R.id.mealCode);
     String mealCodeStr = "";
     public OtherFragment() {
         // Required empty public constructor
@@ -95,6 +94,9 @@ public class OtherFragment extends Fragment implements View.OnClickListener{
 
         Button button = (Button)v.findViewById(R.id.other_add_to_cart);
         button.setOnClickListener(this);
+
+        Button button2 = (Button)v.findViewById(R.id.other_add_to_faves);
+        button2.setOnClickListener(this);
 
         item1 = 0;
         item2 = 0;
@@ -246,25 +248,8 @@ public class OtherFragment extends Fragment implements View.OnClickListener{
                     String old_email = oldUser.getEmail();
                     if (email_str.equals(old_email)){
 
-                        prefShared = getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
-                        boolean isCartEmpty = prefShared.getBoolean("cartEmpty",true);
-                        if (isCartEmpty){
-                            Gson gson = new Gson();
-                            oldUser.addToCart(item); // add to item to cart of user in list
-
-                            prefShared = this.getActivity().getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefShared.edit();
-                            editor.putBoolean("cartEmpty", false);
-                            editor.commit();
-
-                            Type type = new TypeToken<List<User>>() {}.getType();
-                            String json = gson.toJson(userList, type);
-                            // save all users and their to file
-                            writeToFile(json);
-
-                        }
-                        else{
-                            // read users.json and compare emails until you find current user... get users' cart
+                        boolean isCartEmpty = false;
+                        oldUser.setIsCartEmpty(isCartEmpty);
                             Gson gson = new Gson();
                             oldUser.addToCart(item); // add to item to cart of user in list
 
@@ -274,7 +259,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener{
                             writeToFile(json);
                         }
                     }
-                }
+
 
 
                 selectedFragment = new CartFragment();
@@ -306,6 +291,8 @@ public class OtherFragment extends Fragment implements View.OnClickListener{
 
                         Gson gson = new Gson();
                         oldUser.addToFavoriteItems(item); // add to item to favoriteItemsList of user in list
+                        boolean value = true;
+                        oldUser.setAreFavoriteItemsStored(value);
 
                         Type type = new TypeToken<List<User>>() {}.getType();
                         String json = gson.toJson(userList, type);

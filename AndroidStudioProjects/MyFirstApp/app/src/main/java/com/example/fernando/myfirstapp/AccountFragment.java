@@ -126,7 +126,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
 
             if (verifyFlag){
                 Gson gson = new Gson();
-                //nextAvailableMemberID = init_memberID + userList.size(); // comment back in later for when database is 0
+                //nextAvailableMemberID = init_memberID + userList.size(); // comment this line back into functional state... when database is 0
                 User newUser = new User( email_str,  password_str,  name_str,  address_str,  phone_str, nextAvailableMemberID, 0);
                 userList.add(newUser);
 

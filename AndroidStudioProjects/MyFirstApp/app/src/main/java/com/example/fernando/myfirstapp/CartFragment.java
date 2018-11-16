@@ -28,6 +28,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,9 +90,9 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             String old_email = oldUser.getEmail();
             if (email_str.equals(old_email)){
                 List<Item> currentCart = oldUser.getCartItems();
-                Integer counter = 6;
+                Integer counter = 4;
                 TableLayout tl =  (TableLayout) v.findViewById(R.id.carttablelayout);
-
+                DecimalFormat df = new DecimalFormat("#.00");
                 for (Item item : currentCart){
 
                     TableRow tr = new TableRow(myContext);
@@ -104,7 +107,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                         String item1_name = item.getName();
                         double item1_price = item.getPrice();
                         subtotal = subtotal + item1_price;
-                        String item1_price_str = String.valueOf(item1_price);
+                        String item1_price_str = df.format(item1_price);
                         String item1_str = item1_name + " - $" + item1_price_str;
 
                         tv2.setText(item1_str);
@@ -117,29 +120,29 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 }
 
 
+
                 double tax = subtotal * .08;
                 double total = subtotal + tax;
 
-                String Total_str = String.valueOf(total);
+                String Subtotal_str = df.format(subtotal);
+                String Total_str = df.format(total);
+                String Tax_str = df.format(tax);
+                Subtotal_str = "$"+ Subtotal_str;
+                Total_str = "$"+ Total_str;
+                Tax_str = "$"+ Tax_str;
+
                 Total.setText(Total_str);
-
-                String Subtotal_str = String.valueOf(subtotal);
                 Subtotal.setText(Subtotal_str);
-
-                String Tax_str = String.valueOf(tax);
                 Tax.setText(Tax_str);
-
-
-
 
 
             }
         }
 
-
-
         return v;
     }
+
+
 
 
     @Override
@@ -151,30 +154,32 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         FragmentManager fragManager = myContext.getSupportFragmentManager();
 
         String email_str = prefShared.getString("email", "N/A");
-
+        String deliveryMethod_str = prefShared.getString("deliveryMethod", "N/A");
 
         switch(v.getId()) {
             case R.id.checkout:
 
-                // add a payment method
-                for (User oldUser : userList) {
+                if (subtotal != 0){
+                    // add a payment method
+                    for (User oldUser : userList) {
 
-                    String old_email = oldUser.getEmail();
-                    if (email_str.equals(old_email)){
-                        if (oldUser.getAreCardsStored()){
-                            selectedFragment = new SelectCardFragment();
-                            fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-                        }
-                        else{
-                            selectedFragment = new AddCardFragment();
-                            fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                        String old_email = oldUser.getEmail();
+                        if (email_str.equals(old_email)){
+                            if (oldUser.getAreCardsStored()){
+                                selectedFragment = new SelectCardFragment();
+                                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                            }
+                            else{
+                                selectedFragment = new AddCardFragment();
+                                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                            }
                         }
                     }
                 }
-
-
-
-
+                else{
+                    selectedFragment = new CheckoutFragment();
+                    fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                }
 
                 break;
 
@@ -185,9 +190,22 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                     String old_email = oldUser.getEmail();
                     if (email_str.equals(old_email)){
                         //
+                        List<Item> newOrder = oldUser.getCartItems();
+                        Integer memberID = oldUser.getMemberID();   // add logic to find next available order# by searching through users
+                        Order order = new Order(memberID,deliveryMethod_str,newOrder);
+                        oldUser.addToSetOfFaveOrders(order);
+                        oldUser.setAreFavoriteOrdersStored(true);
+
+                        Gson gson = new Gson();
+
+                        // converts object to json string, print to
+                        Type type = new TypeToken<List<User>>() {}.getType();
+                        String json = gson.toJson(userList, type);
+
+                        writeToFile(json);
+
                     }
                 }
-
                 break;
 
         }

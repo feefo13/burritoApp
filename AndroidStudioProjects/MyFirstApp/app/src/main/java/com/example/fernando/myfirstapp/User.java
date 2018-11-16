@@ -51,6 +51,13 @@ public class User {
 
     }
 
+    public Boolean getCartEmpty() {
+        return isCartEmpty;
+    }
+    public void setIsCartEmpty(boolean value){
+        this.isCartEmpty = value;
+    }
+
     public List<Order> getOrder_num_list() {
         return this.order_num_list;
     }
@@ -156,6 +163,6 @@ public class User {
 
 
     public void setCartItems(List<Item> cartItems) {
-        this.cartItems = cartItems;
+        this.cartItems = new ArrayList<Item>(cartItems);
     }
 }
