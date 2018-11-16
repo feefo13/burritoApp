@@ -11,12 +11,12 @@
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_cardholders_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_cardholders_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name on Card"
@@ -25,12 +25,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_card_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_card_number"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Card Number"
@@ -39,26 +40,26 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_expire_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_expire_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Expiration Date"
+            android:hint="Expiration Date (MM/YY)"
             android:inputType="text" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_security_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_security_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="CCV"
@@ -67,13 +68,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_zipcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true"
         app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_zipcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Zip"
@@ -82,6 +83,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/create_cc_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Confirm" />

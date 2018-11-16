@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -78,27 +80,39 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         fave.setOnClickListener(this);
 
         List<User> userList = new ArrayList<User>();
+        userList = readFromFile(userList);
         String email_str = prefShared.getString("email", "N/A");
-        Log.d("tag", email_str);
 
         for (User oldUser : userList) {
-            Log.d("tag", "here2");
             String old_email = oldUser.getEmail();
             if (email_str.equals(old_email)){
                 List<Item> currentCart = oldUser.getCartItems();
-                Log.d("tag", "here1");
+                Integer counter = 6;
+                TableLayout tl =  (TableLayout) v.findViewById(R.id.carttablelayout);
+
                 for (Item item : currentCart){
-                    // set a text view
-                    Log.d(getTag(), "here");
-                    String item1_name = item.getName();
-                    double item1_price = item.getPrice();
-                    subtotal = subtotal + item1_price;
-                    String item1_price_str = String.valueOf(item1_price);
-                    String item1_str = item1_name + " - " + item1_price_str;
 
-                    item1 = (TextView) v.findViewById(R.id.item1);
+                    TableRow tr = new TableRow(myContext);
+                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                    tr.setLayoutParams(lp);
 
-                    item1.setText(item1_str);
+                        // set a text view
+                    TextView tv = new TextView(myContext);
+                    tv.setText("1x:");
+
+                    TextView tv2 = new TextView(myContext);
+                        String item1_name = item.getName();
+                        double item1_price = item.getPrice();
+                        subtotal = subtotal + item1_price;
+                        String item1_price_str = String.valueOf(item1_price);
+                        String item1_str = item1_name + " - $" + item1_price_str;
+
+                        tv2.setText(item1_str);
+
+                        tr.addView(tv);
+                    tr.addView(tv2);
+                    tl.addView(tr,counter);
+                    counter = counter + 1;
 
                 }
 
@@ -141,16 +155,24 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
         switch(v.getId()) {
             case R.id.checkout:
-                // check for list of cards, add rows.  add a card
 
+                // add a payment method
                 for (User oldUser : userList) {
 
                     String old_email = oldUser.getEmail();
                     if (email_str.equals(old_email)){
-                            // stored cc logic
+                        if (oldUser.getAreCardsStored()){
+                            selectedFragment = new SelectCardFragment();
+                            fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                         }
-
+                        else{
+                            selectedFragment = new AddCardFragment();
+                            fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                        }
                     }
+                }
+
+
 
 
 

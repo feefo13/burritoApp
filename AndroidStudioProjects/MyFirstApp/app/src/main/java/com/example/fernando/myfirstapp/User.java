@@ -18,7 +18,7 @@ public class User {
     Boolean areOrdersPlaced ; // populate recent orders
     Boolean isCartEmpty;
 
-    Integer[] order_num_list; // prior order numbers
+    List<Order> order_num_list; // prior order numbers
     List<Item> favoriteItems;
     List<Order> favoriteOrders;
     List<CC> storedCards;
@@ -47,22 +47,23 @@ public class User {
         this.favoriteItems = new ArrayList<Item>();
         this.storedCards = new ArrayList<CC>();
         this.cartItems = new ArrayList<Item>();
+        this.order_num_list = new ArrayList<Order>();
 
     }
 
-    public void setOrder_num_list(Integer[] order_num_list) {
-        this.order_num_list = order_num_list;
+    public List<Order> getOrder_num_list() {
+        return this.order_num_list;
     }
 
     public List<Item> getCartItems() {
         return cartItems;
     }
 
-    public void addToSetOfOrderItems(Item item){
-        this.favoriteItems.add(item);
+    public void addToOrderHistory(Order order){
+        this.order_num_list.add(order);
     }
 
-    public void addToSetOfOrders(Order order){
+    public void addToSetOfFaveOrders(Order order){
         this.favoriteOrders.add(order);
     }
 
@@ -109,9 +110,6 @@ public class User {
         return favoriteItems;
     }
 
-    public Integer[] getOrder_num_list() {
-        return order_num_list;
-    }
 
     public String getAddress() {
         return address;
@@ -154,5 +152,10 @@ public class User {
 
     public Boolean getAreFavoriteOrdersStored() {
         return areFavoriteOrdersStored;
+    }
+
+
+    public void setCartItems(List<Item> cartItems) {
+        this.cartItems = cartItems;
     }
 }
