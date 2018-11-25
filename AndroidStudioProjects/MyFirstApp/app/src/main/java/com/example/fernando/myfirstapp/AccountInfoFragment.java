@@ -8,10 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -26,18 +28,13 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 
-public class AccountInfoFragment extends Fragment {
-    private static final String FILENAME = "users.json";
-    private static final Integer init_memberID = 116435;
-    Integer nextAvailableMemberID;
+public class AccountInfoFragment extends Fragment implements View.OnClickListener {
 
     View v;
     private FragmentActivity myContext;
 
     SharedPreferences prefShared;
     public static final String PREF_FILE_NAME = "userdetails";
-    SharedPreferences.Editor editor;
-    List<User> userList;
 
     TextView email;
     TextView name;
@@ -56,6 +53,11 @@ public class AccountInfoFragment extends Fragment {
         address = (TextView) v.findViewById(R.id.userAddress);
         address2 = (TextView) v.findViewById(R.id.userAddress2);
 
+        Button recentOrders = (Button) v.findViewById(R.id.recentOrdersButton);
+        recentOrders.setOnClickListener(this);
+
+        Button editButton = (Button) v.findViewById(R.id.editButton);
+        editButton.setOnClickListener(this);
 
         SharedPreferences prefShared = getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
         String email_str = prefShared.getString("email", "N/A");
@@ -63,10 +65,9 @@ public class AccountInfoFragment extends Fragment {
         String phone_str = prefShared.getString("phone", "N/A");
         String address_str = prefShared.getString("address", "N/A");
 
-
-        String[] address_list = address_str.split(",");
+        String[] address_list = address_str.split(";");
         address_str = address_list[0] + ",";
-        String address_str2 = address_list[1] + ',' + address_list[2];
+        String address_str2 = address_list[1];
 
         phone.setText(phone_str);
         address.setText(address_str);
@@ -82,5 +83,29 @@ public class AccountInfoFragment extends Fragment {
     public void onAttach(Activity activity) {
         myContext=(FragmentActivity) activity;
         super.onAttach(activity);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Fragment selectedFragment = null;
+        FragmentManager fragManager = myContext.getSupportFragmentManager();
+
+        switch(v.getId()){
+
+            case R.id.editButton:
+                //
+
+                selectedFragment = new AddCardFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+                break;
+
+            case R.id.recentOrdersButton:
+
+                selectedFragment = new RecentOrdersFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+                break;
+        }
     }
 }

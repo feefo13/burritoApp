@@ -27,6 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:layout_column="0"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Burritos"
                 android:textSize="32sp" />
@@ -44,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:id="@+id/menu_item2"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Tacos"
                 android:textSize="32sp" />
@@ -61,6 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:id="@+id/menu_item3"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Kids"
                 android:textSize="32sp" />
@@ -78,6 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:id="@+id/menu_item4"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Sides"
                 android:textSize="32sp" />
@@ -95,6 +103,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:id="@+id/menu_item5"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Drinks"
                 android:textSize="32sp" />
@@ -112,6 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:id="@+id/menu_item6"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Desserts"
                 android:textSize="32sp" />
@@ -129,6 +141,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:id="@+id/menu_item7"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Favorite Items"
                 android:textSize="32sp" />
@@ -146,6 +160,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:id="@+id/menu_item8"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Favorite Orders"
                 android:textSize="32sp" />

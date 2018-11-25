@@ -27,6 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_margin="1dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Carry out"
                 android:textSize="32sp" />
@@ -44,6 +46,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Delivery"
                 android:textSize="32sp" />
@@ -62,6 +66,8 @@
                 android:layout_margin="1dp"
                 android:id="@+id/delivery_item3"
                 android:layout_column="0"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
 
                 android:text="Dine-in"
                 android:textSize="32sp" />

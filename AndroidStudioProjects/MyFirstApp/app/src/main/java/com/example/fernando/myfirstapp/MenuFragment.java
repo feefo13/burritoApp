@@ -47,6 +47,18 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         TextView sidesTextView = (TextView) v.findViewById(R.id.menu_item4);
         sidesTextView.setOnClickListener(this);
 
+        TextView drinksTextView = (TextView) v.findViewById(R.id.menu_item5);
+        drinksTextView.setOnClickListener(this);
+
+        TextView dessertsTextView = (TextView) v.findViewById(R.id.menu_item6);
+        dessertsTextView.setOnClickListener(this);
+
+        TextView itemsTextView = (TextView) v.findViewById(R.id.menu_item7);
+        itemsTextView.setOnClickListener(this);
+
+        TextView ordersTextView = (TextView) v.findViewById(R.id.menu_item8);
+        ordersTextView.setOnClickListener(this);
+
         return v;
     }
 
@@ -91,10 +103,30 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.menu_item4:
                 //Sides
-
-                editor.putString("itemType", "Sides");
-                editor.commit();
                 selectedFragment = new SidesFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                break;
+
+            case R.id.menu_item5:
+                //Drinks
+                selectedFragment = new DrinksFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                break;
+            case R.id.menu_item6:
+                //Desserts
+                selectedFragment = new DessertsFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                break;
+
+            case R.id.menu_item7:
+                //Fave items
+                selectedFragment = new FaveItemsFragment();
+                fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                break;
+
+            case R.id.menu_item8:
+                //Fave orders
+                selectedFragment = new FaveOrdersFragment();
                 fragManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                 break;
         }

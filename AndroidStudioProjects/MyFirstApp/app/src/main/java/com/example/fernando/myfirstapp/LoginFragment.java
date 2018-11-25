@@ -25,7 +25,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -140,6 +142,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             editor.putString("address", oldUser.getAddress());
                             editor.putInt("rewardPoints", oldUser.getRewardPoints());
                             editor.putInt("memberID", oldUser.getMemberID());
+                            Date time = oldUser.getDate();
+                            SimpleDateFormat format = new SimpleDateFormat("MM/dd");
+                            String date_str = format.format(time);
+                            editor.putString("date", date_str);
                             editor.putBoolean("userLoggedIn", true);
                             editor.commit();
 

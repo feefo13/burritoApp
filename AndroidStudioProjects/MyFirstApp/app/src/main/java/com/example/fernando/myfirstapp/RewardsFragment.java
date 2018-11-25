@@ -20,6 +20,7 @@ public class RewardsFragment extends Fragment implements View.OnClickListener{
 
     TextView memberID;
     TextView rewardPTS;
+    TextView sinceDate;
 
     private FragmentActivity myContext;
     public static final String PREF_FILE_NAME = "userdetails";
@@ -38,16 +39,19 @@ public class RewardsFragment extends Fragment implements View.OnClickListener{
 
         memberID = (TextView)  v.findViewById(R.id.userID);
         rewardPTS = (TextView)  v.findViewById(R.id.userPoints);
+        sinceDate = (TextView)  v.findViewById(R.id.sinceDate);
 
         SharedPreferences prefShared = getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
         Integer rewardPTS_int = prefShared.getInt("rewardPoints", 0);
         Integer memberID_int = prefShared.getInt("memberID", 0);
+        String sinceDate_str = prefShared.getString("date", "N/A");
 
         String rewardPTS_str = rewardPTS_int.toString();
         String memberID_str = memberID_int.toString();
 
         memberID.setText(memberID_str);
         rewardPTS.setText(rewardPTS_str);
+        sinceDate.setText(sinceDate_str);
 
         return v;
     }

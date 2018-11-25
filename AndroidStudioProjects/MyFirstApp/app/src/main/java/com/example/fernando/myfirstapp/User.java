@@ -1,6 +1,7 @@
 package com.example.fernando.myfirstapp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class User {
@@ -11,6 +12,7 @@ public class User {
     String phone ;
     Integer memberID ;
     Integer rewardPoints ;
+    Date date;
 
     Boolean areCardsStored ;
     Boolean areFavoriteOrdersStored ;
@@ -27,7 +29,7 @@ public class User {
 
 
     // new users
-    public User (String email ,String password ,String name ,String address ,String phone, Integer memberID, Integer rewardPoints) {
+    public User (String email ,String password ,String name ,String address ,String phone, Integer memberID, Integer rewardPoints, Date date) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -36,6 +38,7 @@ public class User {
         this.memberID = memberID;
         this.rewardPoints = rewardPoints;
         this.isCartEmpty = true;
+        this.date = date;
 
         // set to true after
         this.areCardsStored = false;
@@ -49,6 +52,10 @@ public class User {
         this.cartItems = new ArrayList<Item>();
         this.order_num_list = new ArrayList<Order>();
 
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     public Boolean getCartEmpty() {

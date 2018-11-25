@@ -71,7 +71,21 @@
             android:layout_width="match_parent"
             android:id="@+id/text_input_address"
             android:layout_height="wrap_content"
-            android:hint="Street Address, City, State, Zip Code"
+            android:hint="Street Address, City"
+            android:inputType="textPostalAddress" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/text_input_address2"
+            android:layout_height="wrap_content"
+            android:hint="State, Zip Code"
             android:inputType="textPostalAddress" />
 
     </android.support.design.widget.TextInputLayout>

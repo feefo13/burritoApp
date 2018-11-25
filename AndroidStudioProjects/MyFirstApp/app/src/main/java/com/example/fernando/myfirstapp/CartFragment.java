@@ -43,7 +43,6 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     private static final String FILENAME = "users.json";
 
     TextView deliveryMethod;
-    TextView item1;
     TextView Total;
     TextView Subtotal;
     TextView Tax;
@@ -90,7 +89,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             String old_email = oldUser.getEmail();
             if (email_str.equals(old_email)){
                 List<Item> currentCart = oldUser.getCartItems();
-                Integer counter = 4;
+                Integer counter = 3;
                 TableLayout tl =  (TableLayout) v.findViewById(R.id.carttablelayout);
                 DecimalFormat df = new DecimalFormat("#.00");
                 for (Item item : currentCart){
@@ -101,7 +100,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                         // set a text view
                     TextView tv = new TextView(myContext);
-                    tv.setText("1x:");
+                    tv.setText("1x: ");
+                    tv.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
 
                     TextView tv2 = new TextView(myContext);
                         String item1_name = item.getName();
@@ -191,8 +191,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                     if (email_str.equals(old_email)){
                         //
                         List<Item> newOrder = oldUser.getCartItems();
-                        Integer memberID = oldUser.getMemberID();   // add logic to find next available order# by searching through users
-                        Order order = new Order(memberID,deliveryMethod_str,newOrder);
+                        Order order = new Order(deliveryMethod_str,newOrder);
                         oldUser.addToSetOfFaveOrders(order);
                         oldUser.setAreFavoriteOrdersStored(true);
 
@@ -243,8 +242,6 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             Type type = new TypeToken<List<User>>() {}.getType();
 
             userList =  new Gson().fromJson(br, type);
-            Gson gson = new Gson();
-            Log.d("tag", gson.toJson(userList, type));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

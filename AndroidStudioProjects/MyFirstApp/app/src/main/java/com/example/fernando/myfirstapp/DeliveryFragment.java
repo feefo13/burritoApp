@@ -57,6 +57,7 @@ public class DeliveryFragment extends Fragment implements View.OnClickListener{
         SharedPreferences prefShared = this.getActivity().getSharedPreferences(PREF_FILE_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefShared.edit();
 
+
         switch(v.getId()){
 
             case R.id.delivery_item1:

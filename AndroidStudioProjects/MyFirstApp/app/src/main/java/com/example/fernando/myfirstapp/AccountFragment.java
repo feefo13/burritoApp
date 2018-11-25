@@ -26,7 +26,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AccountFragment extends Fragment implements View.OnClickListener  {
@@ -46,6 +48,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
     EditText confirm_password;
     EditText name;
     EditText address;
+    EditText address2;
     EditText phone;
 
     public AccountFragment() {
@@ -83,6 +86,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
         confirm_password = (EditText) v.findViewById(R.id.text_input_confirm_password);
         name = (EditText) v.findViewById(R.id.text_input_name);
         address = (EditText) v.findViewById(R.id.text_input_address);
+        address2 = (EditText) v.findViewById(R.id.text_input_address2);
         phone = (EditText) v.findViewById(R.id.text_input_phone_number);
 
         return v;
@@ -101,8 +105,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
         String password_str = password.getText().toString();
         String confirm_password_str = confirm_password.getText().toString();
         String name_str = name.getText().toString();
-        String address_str = address.getText().toString();
+        String address_str1 = address.getText().toString();
+        String address_str2 = address2.getText().toString();
         String phone_str = phone.getText().toString();
+        String address_str = address_str1 + ";" + address_str2;
 
         if (password_str.equals(confirm_password_str)){
 
@@ -127,7 +133,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
             if (verifyFlag){
                 Gson gson = new Gson();
                 //nextAvailableMemberID = init_memberID + userList.size(); // comment this line back into functional state... when database is 0
-                User newUser = new User( email_str,  password_str,  name_str,  address_str,  phone_str, nextAvailableMemberID, 0);
+                Date time = new Date();
+                User newUser = new User( email_str,  password_str,  name_str,  address_str,  phone_str, nextAvailableMemberID, 0, time);
                 userList.add(newUser);
 
                 // converts object to json string, print to
@@ -143,8 +150,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
                 editor.putString("name", name_str);
                 editor.putString("phone", phone_str);
                 editor.putString("address", address_str);
-                //editor.putInt("rewardPoints", oldUser.getRewardPoints());
-                //editor.putInt("memberID", oldUser.getMemberID());
+                editor.putInt("rewardPoints", 0);
+                editor.putInt("memberID", nextAvailableMemberID);
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd");
+                String date = format.format(time);
+                editor.putString("date", date);
                 editor.putBoolean("userLoggedIn", true);
                 editor.commit();
 
@@ -209,8 +219,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener  {
 
             userList =  new Gson().fromJson(br, type);
             nextAvailableMemberID = init_memberID + userList.size();
-            Gson gson = new Gson();
-            Log.d("tag", gson.toJson(userList, type));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

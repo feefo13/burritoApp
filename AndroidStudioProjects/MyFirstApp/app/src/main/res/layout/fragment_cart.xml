@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:layout_column="0"
-
+            android:textAlignment="viewEnd"
             android:text="When: "
             android:textSize="18sp" />
 
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:layout_column="1"
-
+            android:textAlignment="viewEnd"
             android:text="ASAP (ready in 12 min)"
             android:textSize="18sp" />
 
@@ -80,23 +80,14 @@
             android:layout_margin="1dp">
 
             <TextView
+                style="@android:style/Widget.DeviceDefault.Light.TextView.SpinnerItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp"
                 android:layout_column="0"
 
+                android:layout_margin="1dp"
                 android:text="Items"
                 android:textSize="18sp" />
-
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="1dp"
-            android:id="@+id/carttablerow">
-
 
 
         </TableRow>
@@ -114,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:layout_column="0"
-
+                android:textAlignment="viewEnd"
                 android:text="Subtotal: "
                 android:textSize="18sp" />
 
@@ -141,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:layout_column="0"
-
+                android:textAlignment="viewEnd"
                 android:text="Tax: "
                 android:textSize="18sp" />
 
@@ -166,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:layout_column="0"
-
+                android:textAlignment="viewEnd"
                 android:text="Total: "
                 android:textSize="18sp" />
 

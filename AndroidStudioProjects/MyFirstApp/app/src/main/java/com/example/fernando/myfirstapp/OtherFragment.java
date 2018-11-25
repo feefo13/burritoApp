@@ -349,8 +349,6 @@ public class OtherFragment extends Fragment implements View.OnClickListener{
             Type type = new TypeToken<List<User>>() {}.getType();
 
             userList =  new Gson().fromJson(br, type);
-            Gson gson = new Gson();
-            Log.d("tag", gson.toJson(userList, type));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

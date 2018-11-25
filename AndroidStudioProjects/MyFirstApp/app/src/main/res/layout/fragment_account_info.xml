@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
@@ -33,16 +34,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp"
                 android:layout_column="0"
+                android:layout_margin="1dp"
 
                 android:text="Email: "
+                android:textAlignment="viewEnd"
                 android:textSize="18sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:layout_column="1"
+
 
                 android:id="@+id/userEmail"
                 android:textSize="18sp" />
@@ -60,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:layout_column="0"
-
+                android:textAlignment="viewEnd"
                 android:text="Phone #: "
                 android:textSize="18sp" />
             <TextView
@@ -85,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:layout_column="0"
-
+                android:textAlignment="viewEnd"
                 android:text="Address: "
                 android:textSize="18sp" />
 
@@ -117,13 +120,22 @@
         </TableRow>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="Continue" />
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/recentOrdersButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Recent Orders" />
 
 
     </TableLayout>
