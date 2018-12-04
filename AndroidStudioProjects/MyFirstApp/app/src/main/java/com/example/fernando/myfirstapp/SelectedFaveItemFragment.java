@@ -488,7 +488,7 @@ public class SelectedFaveItemFragment extends Fragment implements View.OnClickLi
                 List<User> userList = new ArrayList<User>();
                 userList = readFromFile(userList);
                 String email_str = prefShared.getString("email", "N/A");
-                Integer selectedOrderIndex = prefShared.getInt("selectedOrderIndex", 0);
+                Integer selectedOrderIndex = prefShared.getInt("selectedItemIndex", 0);
 
 
                 for (User oldUser : userList) {
